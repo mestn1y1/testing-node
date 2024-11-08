@@ -7,7 +7,7 @@ const parseGender = (gender) => {
 
 const parseNumber = (number) => {
   const isString = typeof number === 'string';
-  if (!isString) return;
+  if (!isString) return false;
 
   const parsedNumber = parseInt(number);
   if (Number.isNaN(parsedNumber)) return;

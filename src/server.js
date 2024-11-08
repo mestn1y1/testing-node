@@ -3,7 +3,7 @@ import pino from 'pino-http';
 import cors from 'cors';
 import { env } from './utils/env.js';
 // import { getAllStudents, getStudentByID } from './services/students.js';
-import studentsRouter from './routers/students.js';
+import router from './routers/index.js';
 import { errorHandler } from './middlewares/errorHandler.js';
 import { notFoundHandler } from './middlewares/notFoundHandler.js';
 
@@ -38,7 +38,7 @@ export const startServer = () => {
     });
   });
 
-  app.use(studentsRouter);
+  app.use(router);
   // додаємо маршрути для студентів
   // app.get('/students', async (req, res) => {
   //   const students = await getAllStudents();
