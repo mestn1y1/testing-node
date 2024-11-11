@@ -1,6 +1,7 @@
 import express from 'express';
 import pino from 'pino-http';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 import { env } from './utils/env.js';
 // import { getAllStudents, getStudentByID } from './services/students.js';
 import router from './routers/index.js';
@@ -23,7 +24,7 @@ export const startServer = () => {
   );
 
   app.use(cors());
-
+  app.use(cookieParser());
   app.use(
     pino({
       transport: {

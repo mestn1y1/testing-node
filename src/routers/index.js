@@ -5,6 +5,6 @@ import authRouter from './auth.js';
 const router = Router();
 
 router.use('/students', studentsRouter);
-router.use('/register', authRouter);
+router.use('/auth', authRouter);
 
 export default router;

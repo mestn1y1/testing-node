@@ -10,7 +10,7 @@ import { validateBody } from '../middlewares/validateBody.js';
 const router = Router();
 
 router.post(
-  '/',
+  '/register',
   validateBody(registerUserSchema),
   ctrlWrapper(registerUserController),
 );
