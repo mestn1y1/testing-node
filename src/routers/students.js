@@ -9,6 +9,7 @@ import {
 } from '../controllers/controllers.js';
 import { ctrlWrapper } from '../utils/ctrlWrapper.js';
 import { validateBody } from '../middlewares/validateBody.js';
+import { authenticate } from '../middlewares/authenticate.js';
 import {
   createStudentSchema,
   updateStudentSchema,
@@ -16,6 +17,8 @@ import {
 import { isValidId } from '../middlewares/isValid.js';
 
 const router = Router();
+
+router.use(authenticate);
 
 router.get('/', ctrlWrapper(getStudentsController));
 
