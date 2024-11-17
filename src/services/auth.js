@@ -2,8 +2,11 @@ import createHttpError from 'http-errors';
 import { randomBytes } from 'crypto';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import handlebars from 'handlebars';
+import path from 'path';
+import fs from 'node:fs/promises';
 import { UsersCollection } from '../db/models/user.js';
-import { FIFTEEN_MINUTES, ONE_DAY, SMTP } from '../constants/index.js';
+import { FIFTEEN_MINUTES, ONE_DAY, SMTP, TEMPLATES_DIR } from '../constants/index.js';
 import { SessionsCollection } from '../db/models/session.js';
 import { env } from '../utils/env.js';
 import { sendEmail } from '../utils/sendMail.js';
@@ -105,10 +108,23 @@ export const requestResetToken = async (email) => {
     },
   );
 
+  const resetPasswordTemlatePath = path.join(TEMPLATES_DIR, 'reset-password-email.html');
+
+  const templateSource = ((await fs.readFile(resetPasswordTemlatePath)).toString());
+
+  const template = handlebars.compile(templateSource);
+
+  const html = template({
+    name: user.name,
+    link: `${env('APP_DOMAIN')}/reset-password?token=${resetToken}`,
+  });
+
+
+
   await sendEmail({
     from: env(SMTP.SMTP_FROM),
     to: email,
     subject: 'Reset your password',
-    html: `<p>Click <a href="${resetToken}">here</a> to reset your password</p>`,
+    html,
   });
 };
