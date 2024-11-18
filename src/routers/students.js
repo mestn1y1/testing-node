@@ -26,7 +26,7 @@ router.get('/', ctrlWrapper(getStudentsController));
 router.get('/:studentId', isValidId, ctrlWrapper(getStudentByIDController));
 
 router.post(
-  '/students',
+  '/',
   isValidId,
   upload.single('photo'),
   validateBody(createStudentSchema),
