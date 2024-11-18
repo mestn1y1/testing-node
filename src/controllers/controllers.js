@@ -59,6 +59,8 @@ export const getStudentByIDController = async (req, res, next) => {
 
 export const createStudentController = async (req, res) => {
   const student = await createStudent(req.body);
+  const photo = req.file;
+  console.log(photo);
 
   res.status(201).json({
     status: 201,
