@@ -15,6 +15,7 @@ import {
   updateStudentSchema,
 } from '../validation/students.js';
 import { isValidId } from '../middlewares/isValid.js';
+import { upload } from '../middlewares/multer.js';
 
 const router = Router();
 
@@ -26,6 +27,8 @@ router.get('/:studentId', isValidId, ctrlWrapper(getStudentByIDController));
 
 router.post(
   '/students',
+  isValidId,
+  upload.single('photo'),
   validateBody(createStudentSchema),
   ctrlWrapper(createStudentController),
 );
@@ -35,6 +38,8 @@ router.delete('/:studentId', isValidId, ctrlWrapper(deleteStudentController));
 router.put(
   '/:studentId',
   isValidId,
+  upload.single('photo'),
+
   validateBody(createStudentSchema),
   ctrlWrapper(upsertStudentController),
 );
@@ -42,6 +47,7 @@ router.put(
 router.patch(
   '/:studentId',
   isValidId,
+  upload.single('photo'),
   validateBody(updateStudentSchema),
   ctrlWrapper(patchStudentController),
 );
