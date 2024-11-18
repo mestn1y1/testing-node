@@ -25,7 +25,7 @@ router.get('/', ctrlWrapper(getStudentsController));
 router.get('/:studentId', isValidId, ctrlWrapper(getStudentByIDController));
 
 router.post(
-  '/students',
+  '/',
   validateBody(createStudentSchema),
   ctrlWrapper(createStudentController),
 );
