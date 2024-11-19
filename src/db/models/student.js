@@ -26,6 +26,7 @@ const studentSchema = new Schema(
       required: true,
       default: false,
     },
+    photo: { type: String },
   },
   {
     timestamps: true,
